@@ -5,8 +5,8 @@ class wildfly::config(
   $mode                      = $wildfly::mode,
   $user                      = $wildfly::user,
   $profile                   = $wildfly::profile,
-  $default_conf              = $wildfly::default_conf,
-  $init_script               = $wildfly::init_script,
+#  $default_conf              = $wildfly::default_conf,
+#  $init_script               = $wildfly::init_script,
   $wait_time                 = $wildfly::wait_time,
   $bind_address              = $wildfly::bind_address,
   $bind_address_management   = $wildfly::bind_address_management,
@@ -19,10 +19,12 @@ class wildfly::config(
 
   case $::osfamily {
     'RedHat': {
+      $default_conf = '/etc/default/wildfly.conf'
       $init_script = 'wildfly-init-redhat.sh'
       if debug_mode == true { $init_script = 'wildfly-init-redhat-debug.sh' }
     }
     'Debian': {
+      $default_conf = '/etc/default/wildfly'
       $init_script = 'wildfly-init-debian.sh'
       if debug_mode == true { $init_script = 'wildfly-init-debian-debug.sh' }
     }
