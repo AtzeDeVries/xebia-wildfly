@@ -17,6 +17,7 @@ class wildfly::config(
 
 ) {
 
+  notice($debug_mode)
   case $::osfamily {
     'RedHat': {
       $default_conf = '/etc/default/wildfly.conf'
