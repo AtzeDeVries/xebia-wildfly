@@ -13,10 +13,25 @@ class wildfly::config(
   $deployment_dir            = $wildfly::deployment_dir,
   $admin_user                = $wildfly::admin_user,
   $admin_password            = $wildfly::admin_password,
+  $debug_mode                = $wildfly::debug_mode
 
 ) {
 
-
+  case $::osfamily {
+    'RedHat': {
+      $default_conf = '/etc/default/wildfly.conf'
+      $init_script = 'wildfly-init-redhat.sh'
+      if debug_mode == true { $init_script = 'wildfly-init-redhat-debug.sh' }
+    }
+    'Debian': {
+      $default_conf = '/etc/default/wildfly'
+      $init_script = 'wildfly-init-debian.sh'
+      if debug_mode == true { $init_script = 'wildfly-init-debian-debug.sh' }
+    }
+    default: {
+      fail("${::operatingsystem} not supported")
+    }
+  }
 
 
 

@@ -28,7 +28,8 @@ class wildfly(
   $xms                        = $wildfly::params::xms,
   $maxpermsize                = $wildfly::params::maxpermsize,
   $logging_properties         = $wildfly::params::logging_properties,
-  $system_properties          = $wildfly::params::system_properties
+  $system_properties          = $wildfly::params::system_properties,
+  $debug_mode                 = $wildfly::params::debug_mode
 ) inherits wildfly::params {
 
   include wildfly::validation

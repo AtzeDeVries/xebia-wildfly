@@ -45,6 +45,9 @@ class wildfly::params {
 
   $system_properties        = {}
 
+  #debug_mode
+  $debug_mode               = false
+
   case $::osfamily {
     'RedHat': {
       $default_conf = '/etc/default/wildfly.conf'
